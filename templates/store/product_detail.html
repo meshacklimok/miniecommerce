@@ -1,0 +1,62 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left Column: Product Images -->
+        <div class="col-md-6">
+            <!-- Main Image -->
+            {% if product.main_image %}
+            <img id="mainProductImage" src="{{ product.main_image.url }}" class="img-fluid rounded mb-3" alt="{{ product.name }}">
+            {% elif product.image %}
+            <img id="mainProductImage" src="{{ product.image.url }}" class="img-fluid rounded mb-3" alt="{{ product.name }}">
+            {% else %}
+            <img id="mainProductImage" src="{% static 'images/no-image.png' %}" class="img-fluid rounded mb-3" alt="No Image">
+            {% endif %}
+
+            <!-- Additional Images -->
+            {% if additional_images %}
+            <div class="d-flex flex-wrap gap-2">
+                {% for img in additional_images %}
+                <img src="{{ img.image.url }}" class="img-thumbnail thumbnail-img" style="width:80px; height:80px; object-fit:cover; cursor:pointer;" alt="Additional Image">
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Right Column: Product Details -->
+        <div class="col-md-6">
+            <h2 class="fw-bold">{{ product.name }}</h2>
+            {% if product.category %}
+            <p class="text-muted">{{ product.category.name }}</p>
+            {% endif %}
+            <h4 class="text-success fw-bold">Ksh {{ product.price }}</h4>
+            <p>{{ product.description }}</p>
+
+            {% if product.is_in_stock %}
+            <span class="badge bg-success mb-3">In Stock</span>
+            {% else %}
+            <span class="badge bg-danger mb-3">Out of Stock</span>
+            {% endif %}
+
+            <a href="{% url 'store:add_to_cart' product.id %}" class="btn btn-primary fw-bold">Add to Cart</a>
+        </div>
+    </div>
+</div>
+
+<!-- JS to switch main image when thumbnail clicked -->
+<script>
+const mainImage = document.getElementById('mainProductImage');
+const thumbnails = document.querySelectorAll('.thumbnail-img');
+
+thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', () => {
+        mainImage.src = thumbnail.src;
+    });
+});
+</script>
+{% endblock %}

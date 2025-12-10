@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Update Product</h2>
+
+    <!-- Display messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Product update form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="form-text">{{ field.help_text }}</div>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Navbar (Optional: keep your existing one if in base.html) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'store:home' %}">Mini E-Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'store:product_list' %}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'accounts:customer_dashboard' %}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{% url 'accounts:login' %}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Carousel -->
+    <div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            {% for product in products %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                {% if product.main_image %}
+                <img src="{{ product.main_image.url }}" class="d-block w-100 rounded" alt="{{ product.name }}" style="height:250px; object-fit:cover;">
+                {% else %}
+                <img src="{% static 'images/no-image.png' %}" class="d-block w-100 rounded" alt="No Image" style="height:250px; object-fit:cover;">
+                {% endif %}
+                <div class="carousel-caption d-none d-md-block p-2 rounded" style="background: rgba(0,123,255,0.7);">
+                    <h5 class="text-white fw-bold">{{ product.name }}</h5>
+                    <p class="text-white fw-semibold">Ksh {{ product.price }}</p>
+                    <a href="{% url 'store:product_detail' product.id %}" class="btn btn-warning btn-sm fw-bold text-dark">View Product</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Carousel controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-2"></span>
+        </button>
+
+        <!-- Carousel indicators -->
+        <div class="carousel-indicators mt-3">
+            {% for product in products %}
+            <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% endif %}"
+                aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Shop Now Button -->
+    <div class="text-center mb-5">
+        <a href="{% url 'store:product_list' %}" class="btn btn-gradient btn-lg text-white fw-bold"
+            style="background: linear-gradient(to right,#ff7e5f,#feb47b);">Shop Now</a>
+    </div>
+
+    <!-- Featured Products Grid -->
+    <h2 class="mb-4 text-center text-primary fw-bold">Featured Products</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 rounded">
+                {% if product.main_image %}
+                <img src="{{ product.main_image.url }}" class="card-img-top rounded" alt="{{ product.name }}" style="height:150px; object-fit:cover;">
+                {% else %}
+                <img src="{% static 'images/no-image.png' %}" class="card-img-top rounded" alt="No Image" style="height:150px; object-fit:cover;">
+                {% endif %}
+                <div class="card-body d-flex flex-column bg-light rounded">
+                    <h5 class="card-title text-dark fw-bold">{{ product.name }}</h5>
+                    <p class="card-text text-muted text-truncate">{{ product.description }}</p>
+                    <p class="card-text fw-bold text-success">Ksh {{ product.price }}</p>
+                    <a href="{% url 'store:product_detail' product.id %}" class="btn btn-outline-primary mt-auto fw-bold">View</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No products available right now.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="bg-light text-center text-lg-start mt-5 py-4">
+    <div class="container">
+        <div class="text-center p-3">
+            © 2025 Mini E-Shop | Designed by You
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Status{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            {% if payment_success %}
+            <div class="alert alert-success text-center" role="alert">
+                <h4 class="alert-heading">Payment Successful!</h4>
+                <p>Thank you for your payment.</p>
+                <hr>
+                <p class="mb-0"><strong>Transaction ID:</strong> {{ transaction_id }}</p>
+                <p><strong>Amount:</strong> Ksh {{ amount }}</p>
+                <p><strong>Phone Number:</strong> {{ phone_number }}</p>
+                <a href="{% url 'store:order_list' %}" class="btn btn-primary mt-3">View Orders</a>
+            </div>
+
+            {% elif payment_failed %}
+            <div class="alert alert-danger text-center" role="alert">
+                <h4 class="alert-heading">Payment Failed!</h4>
+                <p>Unfortunately, your payment could not be processed.</p>
+                <hr>
+                <p class="mb-0"><strong>Reason:</strong> {{ error_message }}</p>
+                <a href="{% url 'store:product_list' %}" class="btn btn-secondary mt-3">Return to Shop</a>
+            </div>
+
+            {% else %}
+            <div class="alert alert-warning text-center" role="alert">
+                <h4 class="alert-heading">Payment Pending</h4>
+                <p>Your payment is being processed. Please check your M-Pesa account.</p>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

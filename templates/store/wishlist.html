@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}My Wishlist{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">My Wishlist</h2>
+
+    {% if wishlist_items %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for item in wishlist_items %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                {% if item.product.image %}
+                <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.name }}">
+                {% else %}
+                <img src="{% static 'images/no-image.png' %}" class="card-img-top" alt="No Image">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text text-truncate">{{ item.product.description }}</p>
+                    <p class="card-text fw-bold">Ksh {{ item.product.price }}</p>
+                    <div class="mt-auto d-flex justify-content-between">
+                        <a href="{% url 'store:product_detail' item.product.id %}" class="btn btn-sm btn-outline-primary">View</a>
+                        <a href="{% url 'store:wishlist_remove' item.id %}" class="btn btn-sm btn-danger">Remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Your wishlist is empty. <a href="{% url 'store:product_list' %}">Browse products</a>.</p_

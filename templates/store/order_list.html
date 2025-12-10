@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Orders</h2>
+
+    {% if orders %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Total Amount</th>
+                    <th>Ordered On</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer.get_full_name }}</td>
+                    <td>{{ order.get_status_display }}</td>
+                    <td>Ksh {{ order.total_amount }}</td>
+                    <td>{{ order.created_at|date:"F j, Y, g:i a" }}</td>
+                    <td>
+                        <a href="{% url 'store:order_detail' order.id %}" class="btn btn-sm btn-primary">View</a>
+                        {% if request.user.is_staff %}
+                        <a href="{% url 'store:order_delete' order.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No orders found.</p>
+    {% endif %}
+</div>
+{% endblock %}

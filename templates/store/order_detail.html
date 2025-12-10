@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Order #{{ order.id }}</h2>
+    <p>Status: <strong>{{ order.status|capfirst }}</strong></p>
+    <p>Total Amount: <strong>KES {{ order.total_amount|floatformat:0 }}</strong></p>
+
+    <h4>Items:</h4>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.product.name }} - Quantity: {{ item.quantity }} - KES {{ item.total_price|floatformat:0 }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if order.status != 'paid' %}
+        <a href="{% url 'mpesapayment:initiate_payment' order.id %}" class="btn btn-success mt-3">
+            Pay with M-Pesa
+        </a>
+    {% else %}
+        <div class="alert alert-success mt-3">This order has been paid.</div>
+    {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
