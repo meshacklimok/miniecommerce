@@ -24,8 +24,7 @@ SECRET_KEY = 'django-insecure--hn&-m)n9y3cvfcc-wq35k&-u4v30l03=wdr&mng#xhuozpcq&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
-ALLOWED_HOSTS = ['miniecommerce-hb7o.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'miniecommerce-hb7o.onrender.com']
 DEBUG = False
 
 
@@ -78,7 +77,7 @@ if CLOUDINARY_CONFIGS['cloud_name']:
     cloudinary.config(**CLOUDINARY_CONFIGS)
 
 import os
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'miniecommerce-hb7o.onrender.com']
 
 # Add ngrok dynamically if set
 NGROK_URL = config('NGROK_URL', default='')
