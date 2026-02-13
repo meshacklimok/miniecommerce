@@ -4,3 +4,4 @@ django
 python-decouple
 python-dotenv
 gunicorn
+django-widget-tweaks
