@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--hn&-m)n9y3cvfcc-wq35k&-u4v30l03=wdr&mng#xhuozpcq&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ['miniecommerce-hb7o.onrender.com']
+DEBUG = False
 
 
 # Application definition
