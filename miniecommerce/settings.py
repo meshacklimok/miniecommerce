@@ -199,3 +199,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Allow secure proxy headers (required for Render HTTPS)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Optional: only if using forms
+CSRF_TRUSTED_ORIGINS = ['https://miniecommerce-hb7o.onrender.com']
