@@ -23,4 +23,8 @@ urlpatterns = [
     path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
     path('cancel-order/<int:order_id>/', views.cancel_order, name='cancel_order'),
     path('order/<int:order_id>/', views.order_detail, name='order_detail'),
+    path('shipping-info/', views.shipping_info, name='shipping_info'),
+    # About Us page
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
 ]

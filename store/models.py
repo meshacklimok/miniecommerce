@@ -23,6 +23,7 @@ class Category(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+
 # ----------------------------
 # Products (single consolidated model)
 # ----------------------------
@@ -48,6 +49,7 @@ class Product(models.Model):
         self.is_in_stock = self.quantity > 0
         super().save(*args, **kwargs)
 
+
 # ----------------------------
 # Additional Images
 # ----------------------------
@@ -58,6 +60,7 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.product.name}"
+
 
 # ----------------------------
 # Reviews
@@ -72,22 +75,37 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.rating} stars by {self.customer.username} for {self.product.name}"
 
+
 # ----------------------------
 # Orders
 # ----------------------------
 class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
-        ('completed', 'Completed'),
+        ('processing', 'Processing / Packed'),
+        ('shipped', 'Shipped / Out for Delivery'),
+        ('completed', 'Completed / Delivered'),
         ('cancelled', 'Cancelled'),
     ]
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='store_orders')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    shipping_address = models.TextField(blank=True, null=True)
+    estimated_delivery = models.DateField(blank=True, null=True)
+    customer_notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # Status Timestamps
+    pending_at = models.DateTimeField(blank=True, null=True)
+    processing_at = models.DateTimeField(blank=True, null=True)
+    shipped_at = models.DateTimeField(blank=True, null=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    cancelled_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"Order #{self.id} ({self.user.username})"
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
@@ -97,3 +115,19 @@ class OrderItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.price
+
+
+# ----------------------------
+# Optional: Order Tracking Logs
+# ----------------------------
+class OrderTracking(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='tracking_updates')
+    status = models.CharField(max_length=20, choices=Order.STATUS_CHOICES)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    note = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['timestamp']
+
+    def __str__(self):
+        return f"{self.get_status_display()} for Order #{self.order.id} at {self.timestamp}"

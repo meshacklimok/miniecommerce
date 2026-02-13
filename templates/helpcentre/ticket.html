@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Submit Ticket{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Submit a Support Ticket</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit Ticket</button>
+    </form>
+    <a href="{% url 'helpcentre:my_tickets' %}" class="btn btn-link mt-3">My Tickets</a>
+</div>
+{% endblock %}

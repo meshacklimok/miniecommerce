@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'widget_tweaks',
     'accounts.apps.AccountsConfig',
+    'helpcentre',
     
     
 ]
@@ -57,6 +58,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+WHATSAPP_SUPPORT_NUMBER = config('WHATSAPP_SUPPORT_NUMBER')
 # Email backend for password reset (development)
 # EMAIL_BACKEND = 'django.store.mail.backends.console.EmailBackend'
 # Register Login URL 
@@ -173,6 +175,18 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "minicommerce/static",
+]
+
+# Optional for deployment
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
 
 
 # Static files (CSS, JavaScript, Images)

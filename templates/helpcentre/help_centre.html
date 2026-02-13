@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Help Centre{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Help Centre</h2>
+
+    <!-- Search -->
+    <form method="get" class="mb-4">
+        <input type="text" name="q" class="form-control" placeholder="Search help..." value="{{ request.GET.q }}">
+    </form>
+
+    <!-- Categories -->
+    <div class="mb-3">
+        <h5>Categories</h5>
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.name }}</li>
+            {% empty %}
+                <li>No categories yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- FAQs -->
+    {% for faq in faqs %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <strong>{{ faq.question }}</strong>
+                <p>{{ faq.answer }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No help articles found.</p>
+    {% endfor %}
+
+    <hr>
+
+    <!-- Actions -->
+    <a href="{% url 'helpcentre:submit_ticket' %}" class="btn btn-primary">Submit Ticket</a>
+    <a href="{% url 'helpcentre:contact_support' %}" class="btn btn-outline-secondary">Contact Support</a>
+    <a href="https://wa.me/{{ whatsapp_number }}" class="btn btn-success mt-3" target="_blank">
+        WhatsApp Support
+    </a>
+</div>
+{% endblock %}

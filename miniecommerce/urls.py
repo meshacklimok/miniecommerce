@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('mpesa/', include('mpesapayment.urls')),
     path('', include('store.urls')),  # root URL goes to store home
+    path('help/', include('helpcentre.urls')),
 ]
 
 

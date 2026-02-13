@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - Mini E-Shop{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #ffffff;">
+    <canvas id="heroParticles" class="position-absolute top-0 start-0 w-100 h-100" style="z-index:0;"></canvas>
+
+    <div class="container text-center py-5" style="position: relative; z-index: 1;">
+        <h1 class="display-4 fw-bold neon-text" data-aos="fade-down">Welcome to Mini E-Shop</h1>
+        <p class="lead mt-3 text-light" data-aos="fade-up" data-aos-delay="200">
+            Your trusted online store for gadgets, laptops, phones, and more.
+        </p>
+        <div class="mt-4">
+            <a href="mailto:limomeshk@gmail.com" class="btn btn-light btn-lg me-2 fw-bold neon-btn" data-aos="fade-right" data-aos-delay="400">Email Us</a>
+            <a href="https://wa.me/254748578190" target="_blank" class="btn btn-success btn-lg fw-bold neon-btn" data-aos="fade-left" data-aos-delay="400">WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="hero-img position-absolute bottom-0 end-0 pe-5" style="z-index: 1;" data-aos="fade-left" data-aos-delay="600">
+        <img src="{% static 'images/about-hero.png' %}" class="img-fluid glow-img" alt="Hero Image">
+    </div>
+</section>
+
+<!-- Mission & Vision Section -->
+<section class="mission-vision py-5" style="background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5 neon-text" data-aos="fade-up">Our Mission & Vision</h2>
+        <div class="row g-4">
+            <div class="col-md-6 position-relative" data-aos="fade-right">
+                <!-- Circuit SVG -->
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="0" x2="200" y2="200" stroke="#00fff7" stroke-width="0.3" />
+                    <line x1="200" y1="0" x2="0" y2="200" stroke="#00fff7" stroke-width="0.3" />
+                    <circle cx="100" cy="100" r="1.5" fill="#00fff7" />
+                </svg>
+                <div class="card h-100 border-0 shadow-neon hover-card-digital">
+                    <img src="{% static 'images/mission.jpg' %}" class="card-img-top glow-img" alt="Mission Image">
+                    <div class="card-body text-center">
+                        <h3 class="card-title fw-bold neon-text">Our Mission</h3>
+                        <p class="card-text text-light fs-6">
+                            Deliver high-quality products with exceptional service, ensuring a smooth, secure, and enjoyable online shopping experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 position-relative" data-aos="fade-left">
+                <!-- Circuit SVG -->
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="50" x2="200" y2="150" stroke="#00fff7" stroke-width="0.3" />
+                    <line x1="200" y1="50" x2="0" y2="150" stroke="#00fff7" stroke-width="0.3" />
+                    <circle cx="100" cy="100" r="1.5" fill="#00fff7" />
+                </svg>
+                <div class="card h-100 border-0 shadow-neon hover-card-digital">
+                    <img src="{% static 'images/vision.jpg' %}" class="card-img-top glow-img" alt="Vision Image">
+                    <div class="card-body text-center">
+                        <h3 class="card-title fw-bold neon-text">Our Vision</h3>
+                        <p class="card-text text-light fs-6">
+                            Become the most trusted online store, connecting people with products they love while embracing innovation and sustainability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="our-story py-5" style="background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5 neon-text" data-aos="fade-up">Our Story</h2>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-8 position-relative" data-aos="zoom-in">
+                <!-- Circuit SVG -->
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="0" x2="200" y2="200" stroke="#00fff7" stroke-width="0.3" />
+                    <line x1="200" y1="0" x2="0" y2="200" stroke="#00fff7" stroke-width="0.3" />
+                    <circle cx="100" cy="100" r="1.5" fill="#00fff7" />
+                </svg>
+                <div class="story-card text-center hover-card-digital" style="background-color: rgba(0,0,0,0.7); padding:2rem; border-radius:12px;">
+                    <img src="{% static 'images/our-story.jpg' %}" class="img-fluid rounded glow-img" alt="Our Story Image">
+                    <p class="fs-5 text-light mb-3">
+                        Mini E-Shop was founded to provide seamless online shopping for digital and physical products. 
+                        From smartphones and laptops to essential everyday gadgets, we bring products that make life smarter.
+                    </p>
+                    <p class="fs-5 text-light">
+                        We prioritize quality, reliability, and customer happiness. Each product is carefully selected to meet your needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values py-5" style="background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5 neon-text" data-aos="fade-up">Our Values</h2>
+        <div class="row g-4 text-center">
+            <div class="col-md-4 position-relative" data-aos="fade-up" data-aos-delay="100">
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="0" x2="200" y2="200" stroke="#00fff7" stroke-width="0.3" />
+                    <circle cx="50" cy="50" r="1.5" fill="#00fff7" />
+                </svg>
+                <div class="card-container shadow-neon hover-card-digital">
+                    <img src="{% static 'images/value-customer.jpg' %}" class="img-fluid mb-3 rounded glow-img" alt="Customer First">
+                    <h4 class="fw-bold neon-text">Customer First</h4>
+                    <p class="text-light fs-6">
+                        We prioritize satisfaction and always strive to exceed expectations.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 position-relative" data-aos="fade-up" data-aos-delay="200">
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="0" x2="200" y2="100" stroke="#00fff7" stroke-width="0.3" />
+                    <circle cx="100" cy="50" r="1.5" fill="#00fff7" />
+                </svg>
+                <div class="card-container shadow-neon hover-card-digital">
+                    <img src="{% static 'images/value-integrity.jpg' %}" class="img-fluid mb-3 rounded glow-img" alt="Integrity">
+                    <h4 class="fw-bold neon-text">Integrity</h4>
+                    <p class="text-light fs-6">
+                        Transparency, honesty, and ethical practices are at the heart of everything we do.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 position-relative" data-aos="fade-up" data-aos-delay="300">
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="200" x2="200" y2="0" stroke="#00fff7" stroke-width="0.3" />
+                    <circle cx="150" cy="150" r="1.5" fill="#00fff7" />
+                </svg>
+                <div class="card-container shadow-neon hover-card-digital">
+                    <img src="{% static 'images/value-innovation.jpg' %}" class="img-fluid mb-3 rounded glow-img" alt="Innovation">
+                    <h4 class="fw-bold neon-text">Innovation</h4>
+                    <p class="text-light fs-6">
+                        We embrace new ideas and technologies to continuously improve your shopping experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team py-5" style="background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5 neon-text" data-aos="fade-up">Meet Our Team</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3 col-sm-6 position-relative hover-card-digital" data-aos="fade-up" data-aos-delay="100">
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <line x1="0" y1="0" x2="100" y2="100" stroke="#00fff7" stroke-width="0.2" />
+                    <circle cx="50" cy="50" r="1" fill="#00fff7" />
+                </svg>
+                
+                <img src="{% static 'images\ceo.jpg' %}" class="rounded-circle shadow-neon glow-img" alt="Meshack Limo">
+                <h5 class="mt-3 fw-bold neon-text">Meshack Limo</h5>
+                <p class="text-light">Founder & CEO</p>
+            </div>
+            <div class="col-md-3 col-sm-6 position-relative hover-card-digital" data-aos="fade-up" data-aos-delay="200">
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <line x1="0" y1="0" x2="100" y2="50" stroke="#00fff7" stroke-width="0.2" />
+                    <circle cx="50" cy="25" r="1" fill="#00fff7" />
+                </svg>
+                <img src="{% static 'images/meshack.jpg' %}" class="rounded-circle shadow-neon glow-img" alt="Jane Doe">
+                <h5 class="mt-3 fw-bold neon-text">Jane Doe</h5>
+                <p class="text-light">Operations Manager</p>
+            </div>
+            <div class="col-md-3 col-sm-6 position-relative hover-card-digital" data-aos="fade-up" data-aos-delay="300">
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <line x1="0" y1="100" x2="100" y2="0" stroke="#00fff7" stroke-width="0.2" />
+                    <circle cx="75" cy="75" r="1" fill="#00fff7" />
+                </svg>
+                <img src="{% static 'images/team3.jpg' %}" class="rounded-circle shadow-neon glow-img" alt="John Smith">
+                <h5 class="mt-3 fw-bold neon-text">John Smith</h5>
+                <p class="text-light">Marketing Head</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #ffffff;">
+    <div class="container text-center">
+        <h2 class="fw-bold neon-text" data-aos="fade-up">Ready to start shopping?</h2>
+        <p class="fs-5 text-light" data-aos="fade-up" data-aos-delay="200">
+            Browse our products and enjoy a smooth online experience.
+        </p>
+        <a href="{% url 'store:product_list' %}" class="btn btn-primary btn-lg fw-bold neon-btn" data-aos="fade-up" data-aos-delay="400">Shop Now</a>
+    </div>
+</section>
+
+{% block extra_css %}
+<style>
+/* Neon Text */
+.neon-text {
+    color: #00fff7;
+    text-shadow:
+        0 0 3px #00fff7,
+        0 0 7px #00fff7;
+}
+
+/* Glow Images */
+.glow-img {
+    border-radius: 15px;
+    box-shadow: 0 0 8px #00fff7;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glow-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px #00fff7;
+}
+
+/* Neon Buttons */
+.neon-btn {
+    background: linear-gradient(90deg, #00fff7, #00aaff);
+    color: #000;
+    text-shadow: 0 0 3px #00fff7;
+    box-shadow: 0 0 8px #00fff7;
+    transition: all 0.3s ease;
+}
+.neon-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00fff7, 0 0 30px #00aaff;
+}
+
+/* Card Hover */
+.hover-card-digital {
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0,255,255,0.15);
+    background: rgba(0,0,0,0.6);
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+}
+.hover-card-digital:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 15px #00fff7;
+}
+
+/* Shadow Neon */
+.shadow-neon { box-shadow: 0 0 10px #00fff7; }
+
+/* Circuit SVG */
+.circuit-bg {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+    animation: circuitMove 5s linear infinite alternate;
+}
+@keyframes circuitMove {
+    0% { transform: translate(0px,0px) rotate(0deg); }
+    50% { transform: translate(3px,-3px) rotate(1deg); }
+    100% { transform: translate(0px,0px) rotate(0deg); }
+}
+
+/* Hero particles canvas */
+#heroParticles { pointer-events: none; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-img, .our-story img { position: static !important; margin-top: 2rem; max-height: 200px !important; }
+}
+</style>
+
+<!-- AOS & Hero Particles -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 1000, once: true, mirror: false });
+
+// Hero particles
+const canvas = document.getElementById('heroParticles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let particles = [];
+for(let i=0;i<120;i++){
+    particles.push({x: Math.random()*canvas.width,y: Math.random()*canvas.height,r: Math.random()*2+0.5,dx:(Math.random()-0.5)*0.3,dy:(Math.random()-0.5)*0.3});
+}
+function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = '#00fff7';
+        ctx.fill();
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>canvas.width)p.dx*
+  });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+</script>
+{% endblock %}
+
+{% endblock %}

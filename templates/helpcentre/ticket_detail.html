@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Ticket #{{ ticket.id }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Ticket #{{ ticket.id }} - {{ ticket.subject }}</h2>
+    <p>Status: <strong>{{ ticket.status }}</strong></p>
+    <hr>
+
+    <!-- Chat replies -->
+    <div class="mb-4">
+        {% for reply in replies %}
+            <div class="card mb-2 {% if reply.user == request.user %}bg-light{% else %}bg-white{% endif %}">
+                <div class="card-body">
+                    <small><strong>{{ reply.user.username }}</strong> - {{ reply.created_at|date:"Y-m-d H:i" }}</small>
+                    <p>{{ reply.message }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No replies yet.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Reply form -->
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Send Reply</button>
+    </form>
+
+    <!-- Back & WhatsApp -->
+    <a href="{% url 'helpcentre:my_tickets' %}" class="btn btn-link">Back to My Tickets</a>
+    <a href="https://wa.me/{{ whatsapp_number }}?text=Ticket%20ID%20{{ ticket.id }}" target="_blank" class="btn btn-success">WhatsApp Support</a>
+</div>
+{% endblock %}

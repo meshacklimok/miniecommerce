@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}My Tickets{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Tickets</h2>
+
+    {% if tickets %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.id }}</td>
+                        <td>{{ ticket.subject }}</td>
+                        <td>{{ ticket.status }}</td>
+                        <td>{{ ticket.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>
+                            <a href="{% url 'helpcentre:ticket_detail' ticket.id %}" class="btn btn-sm btn-primary">View</a>
+                            <a href="https://wa.me/{{ whatsapp_number }}?text=Ticket%20ID%20{{ ticket.id }}" target="_blank" class="btn btn-sm btn-success">WhatsApp</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no tickets. <a href="{% url 'helpcentre:submit_ticket' %}">Submit one</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}
+

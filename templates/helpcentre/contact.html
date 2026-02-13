@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Contact Support{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Contact Support</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+    <a href="{% url 'helpcentre:help_centre' %}" class="btn btn-link mt-3">Back to Help Centre</a>
+</div>
+{% endblock %}

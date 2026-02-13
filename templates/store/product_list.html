@@ -5,39 +5,112 @@
 
 {% block content %}
 <div class="container mt-5">
+
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Products</h2>
+        <h2 class="text-primary fw-bold">Products</h2>
+        {% if request.user.is_staff %}
         <a href="{% url 'store:add_product' %}" class="btn btn-primary">Add Product</a>
+        {% endif %}
     </div>
 
     {% if products %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {% for product in products %}
-        <div class="col">
-            <div class="card h-100 shadow-sm">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="col" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'1' }}00">
+            <div class="card h-100 shadow-sm hover-card-digital position-relative">
+                
+                <!-- Optional circuit overlay -->
+                <svg class="circuit-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <line x1="0" y1="0" x2="200" y2="200" stroke="#00fff7" stroke-width="0.2" />
+                    <circle cx="100" cy="100" r="1" fill="#00fff7" />
+                </svg>
+
+                <!-- Product Image -->
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" class="card-img-top product-img" alt="{{ product.name }}" style="height:200px; object-fit:cover;">
+                {% elif product.additional_images.all|length > 0 %}
+                    <img src="{{ product.additional_images.all.0.image.url }}" class="card-img-top product-img" alt="{{ product.name }}" style="height:200px; object-fit:cover;">
                 {% else %}
-                <img src="{% static 'images/no-image.png' %}" class="card-img-top" alt="No Image">
+                    <img src="{% static 'images/no-image.png' %}" class="card-img-top product-img" alt="No Image" style="height:200px; object-fit:cover;">
                 {% endif %}
+
+                <!-- Product Details -->
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ product.name }}</h5>
+                    <h5 class="card-title product-title">{{ product.name }}</h5>
                     <p class="card-text text-truncate">{{ product.description }}</p>
-                    <p class="card-text fw-bold">Ksh {{ product.price }}</p>
+                    <p class="card-text fw-bold text-success">Ksh {{ product.price }}</p>
                     <a href="{% url 'store:product_detail' product.id %}" class="btn btn-sm btn-outline-primary mt-auto">View</a>
                 </div>
+
+                <!-- Staff Actions -->
+                {% if request.user.is_staff %}
                 <div class="card-footer d-flex justify-content-between">
                     <a href="{% url 'store:update_product' product.id %}" class="btn btn-sm btn-warning">Edit</a>
                     <a href="{% url 'store:delete_product' product.id %}" class="btn btn-sm btn-danger">Delete</a>
                 </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
     </div>
     {% else %}
     <p>No products available. 
-        <a href="{% url 'store:add_product' %}">Add a new product</a>.
+        {% if request.user.is_staff %}
+            <a href="{% url 'store:add_product' %}">Add a new product</a>.
+        {% endif %}
     </p>
     {% endif %}
+
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Product Card Digital Effects */
+.hover-card-digital {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.6);
+    overflow: hidden;
+}
+.hover-card-digital:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 12px #00fff7;
+}
+.product-img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+.product-img:hover {
+    transform: scale(1.02);
+}
+.product-title {
+    color: #00fff7;
+    text-shadow: 0 0 2px #00fff7;
+}
+.circuit-bg {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .product-title { font-size: 1rem; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<!-- AOS Scroll Animations -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({ duration: 900, once: true });
+</script>
 {% endblock %}
